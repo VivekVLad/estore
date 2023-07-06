@@ -15,6 +15,7 @@ class UserAdmin(BaseUserAdmin):
         }),
     )
 
+
 class TagInline(GenericTabularInline):
     autocomplete_fields = ['tag']
     model = TaggedItem

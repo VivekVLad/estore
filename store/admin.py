@@ -32,6 +32,7 @@ class ProductImageInline(admin.TabularInline):
             return format_html(f'<img src="{instance.image.url}" class="thumbnail"/>')
         return ''
 
+
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     autocomplete_fields = ['collection']
@@ -67,6 +68,7 @@ class ProductAdmin(admin.ModelAdmin):
     class Media:
         css = {'all':['store/style.css']}
 
+
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ['first_name','last_name','membership']
@@ -75,7 +77,6 @@ class CustomerAdmin(admin.ModelAdmin):
     list_select_related = ['user']
     ordering = ['user__first_name','user__last_name']
     search_fields = ['first_name__istartswith','last_name__istartswith']
-
 
 
 class OrderAdminInline(admin.TabularInline):
@@ -108,7 +109,6 @@ class CollectionAdmin(admin.ModelAdmin):
             }))
         return format_html('<a href="{}">{} Products</a>', url, collection.products_count)
 
-    
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(
             products_count = Count('product')
